@@ -102,7 +102,7 @@ for (h in 1:hmax) {
 #######################################################################################
 # Plot
 #######################################################################################
-# Gráfico para bh_iv
+# Plot bh_iv
 plot_bh_iv <- ggplot(bh_iv, aes(x, bh_iv[,1])) +
   geom_line(size = 2, aes(color = "purple")) +
   geom_ribbon(aes(ymin = bh_iv[,2], ymax = bh_iv[,3]), alpha = 0.2, fill = "purple") +
@@ -110,16 +110,16 @@ plot_bh_iv <- ggplot(bh_iv, aes(x, bh_iv[,1])) +
   xlab("Quarter") +
   ylab("Percent") +
   theme_light() +
-  geom_hline(yintercept = 0, linetype = "dashed")  # Línea en cero
+  geom_hline(yintercept = 0, linetype = "dashed")  # Zero line
 
-# Gráfico para bh
+# Plot bh
 plot_bh <- ggplot(bh, aes(x, bh[,1])) +
-  geom_line(size = 2, aes(color = "blue"), linetype = "dashed") +  # Línea punteada
+  geom_line(size = 2, aes(color = "blue"), linetype = "dashed") +  
   geom_ribbon(aes(ymin = bh[,2], ymax = bh[,3]), alpha = 0.2, fill = "blue") +
   xlab("Quarter") +
   ylab("Percent") +
   theme_light() +
-  geom_hline(yintercept = 0, linetype = "dashed")  # Línea en cero
+  geom_hline(yintercept = 0, linetype = "dashed")  # Zero line
 
 # Combinar los gráficos
 combined_plot <- plot_bh_iv +
@@ -127,11 +127,11 @@ combined_plot <- plot_bh_iv +
   geom_ribbon(data = bh, aes(x, ymin = bh[,2], ymax = bh[,3]), alpha = 0.2, fill = "blue") +
   scale_color_manual(name = "", values = c("purple" = "purple", "blue" = "blue"),
                      labels = c("OLS", "IV")) +
-  guides(color = guide_legend(title = "Estimation")) +  # Personaliza el título de la leyenda si es necesario
+  guides(color = guide_legend(title = "Estimation")) +  Legend Tittle
   geom_hline(yintercept = 0, linetype = "solid") +  # Línea en cero
   theme(legend.position = c(0.1, 0.9), legend.justification = c(0, 1),
-        legend.background = element_rect(fill = "transparent"),  # Fondo transparente
-        legend.key = element_rect(color = NA, fill = "transparent"))  # Clave de leyenda transparente
+        legend.background = element_rect(fill = "transparent"),  # Background
+        legend.key = element_rect(color = NA, fill = "transparent"))  
 
 
 # Mostrar el gráfico combinado
