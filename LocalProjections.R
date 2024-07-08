@@ -9,7 +9,7 @@ library(ivreg)
 library(dynlm)
 library(haven)
 library(ggplot2)
-data_monetary_shock_quarterly <- read_stata("C:/data_monetary_shock_quarterly.dta")
+data_monetary_shock_quarterly <- read_stata("C:/Users/Kevin/Desktop/LPIV/data_monetary_shock_quarterly.dta")
 View(data_monetary_shock_quarterly)
 
 # Keep only nonmissing observations in resid_full i.e. 1969q1 - 2007q4
@@ -102,6 +102,7 @@ for (h in 1:hmax) {
 #######################################################################################
 # Plot
 #######################################################################################
+bh_iv <-data.frame(bh_iv)
 # Plot bh_iv
 plot_bh_iv <- ggplot(bh_iv, aes(x, bh_iv[,1])) +
   geom_line(size = 2, aes(color = "purple")) +
@@ -110,7 +111,7 @@ plot_bh_iv <- ggplot(bh_iv, aes(x, bh_iv[,1])) +
   xlab("Quarter") +
   ylab("Percent") +
   theme_light() +
-  geom_hline(yintercept = 0, linetype = "dashed")  # Zero line
+  geom_hline(yintercept = 0, linetype = "dashed")  
 
 # Plot bh
 plot_bh <- ggplot(bh, aes(x, bh[,1])) +
@@ -119,7 +120,7 @@ plot_bh <- ggplot(bh, aes(x, bh[,1])) +
   xlab("Quarter") +
   ylab("Percent") +
   theme_light() +
-  geom_hline(yintercept = 0, linetype = "dashed")  # Zero line
+  geom_hline(yintercept = 0, linetype = "dashed")  
 
 # Combinar los gráficos
 combined_plot <- plot_bh_iv +
@@ -127,10 +128,10 @@ combined_plot <- plot_bh_iv +
   geom_ribbon(data = bh, aes(x, ymin = bh[,2], ymax = bh[,3]), alpha = 0.2, fill = "blue") +
   scale_color_manual(name = "", values = c("purple" = "purple", "blue" = "blue"),
                      labels = c("OLS", "IV")) +
-  guides(color = guide_legend(title = "Estimation")) +  Legend Tittle
-  geom_hline(yintercept = 0, linetype = "solid") +  # Línea en cero
+  guides(color = guide_legend(title = "Estimation")) +  
+  geom_hline(yintercept = 0, linetype = "solid") +  
   theme(legend.position = c(0.1, 0.9), legend.justification = c(0, 1),
-        legend.background = element_rect(fill = "transparent"),  # Background
+        legend.background = element_rect(fill = "transparent"),  
         legend.key = element_rect(color = NA, fill = "transparent"))  
 
 
